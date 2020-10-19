@@ -4,12 +4,14 @@ import subprocess
 import time
 from googlesearch import search 
 
-
 AI_hear = sr.Recognizer()
 AI_understand = ''
 AI_speak = pyttsx3.init()
 
 running = True
+
+a = []
+n = 0
 
 while running :
     #hear 
@@ -22,7 +24,15 @@ while running :
         print("Me: "+me)
     except:
         me = ""
-        
+    
+    #knowledge    
+    if me is not None:
+        n+=1
+        for i in range (0,n) :
+            a.append(me)
+            
+    #trained        
+               
     #understand
     if me == '':
         AI_understand = 'Im listening'
@@ -40,8 +50,7 @@ while running :
         print('Result for: ' +me)
         for i in search(me, tld='com', lang='en', num=10,stop=5, pause=2.0):   
             print(i) 
-        me = ''
-        
+        me = ''    
     #speak 
     print('AI: '+AI_understand)      
     AI_speak.say(AI_understand)
